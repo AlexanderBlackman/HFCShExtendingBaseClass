@@ -67,7 +67,11 @@ namespace HFCShExtendingBaseClass
             Egg[] eggs = new Egg[numberOfEggs];
             for (int i = 0; i < numberOfEggs; i++)
             {
-                eggs[i] = new Egg(Bird.Randomiser.NextDouble() * 2 + 1, "white");
+                // TODO fix randomness, as all the broken eggs are at the start
+                if (Bird.Randomiser.Next(4) == 0)
+                    eggs[i] = new BrokenEgg("white");
+                else
+                    eggs[i] = new Egg(Bird.Randomiser.NextDouble() * 2 + 1, "white");
             }
             return eggs;
         }
@@ -91,6 +95,16 @@ namespace HFCShExtendingBaseClass
             }
         }
         }
+
+    class BrokenEgg:Egg
+    {
+        public BrokenEgg(string color):base(0,$"broken {color}")
+        {
+      //      Console.WriteLine("A bird laid a broken egg");
+        }
+    }
+
+
     }
 
 
